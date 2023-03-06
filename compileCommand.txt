@@ -1,1 +1,9 @@
-gcc main.c StatsBearer/StatsBearer.c ElementTable.c ElementMaterial.c -o game
+gcc 
+main.c 
+StatsManipulation/StatsBearer/StatsBearer.c 
+StatsManipulation/StatsBearingCreature/StatsBearingCreature.c 
+StatsManipulation/StatsBearingItem/StatsBearingItem.c 
+ElementChemistry/ElementCompound/ElementCompound.c 
+ElementChemistry/ElementMaterial/ElementMaterial.c 
+ElementChemistry/ElementTable/ElementTable.c 
+-o game
