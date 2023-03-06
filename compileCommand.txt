@@ -1,0 +1,1 @@
+gcc main.c StatsBearer/StatsBearer.c ElementTable.c ElementMaterial.c -o game
