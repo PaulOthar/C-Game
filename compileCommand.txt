@@ -3,6 +3,8 @@ main.c
 StatsManipulation/StatsBearer/StatsBearer.c 
 StatsManipulation/StatsBearingCreature/StatsBearingCreature.c 
 StatsManipulation/StatsBearingItem/StatsBearingItem.c 
+GridManipulation/CellDimensions/CellDimensions.c 
+GridManipulation/CellGrid/CellGrid.c 
 ElementChemistry/ElementCompound/ElementCompound.c 
 ElementChemistry/ElementMaterial/ElementMaterial.c 
 ElementChemistry/ElementTable/ElementTable.c 
