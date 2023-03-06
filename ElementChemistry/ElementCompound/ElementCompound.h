@@ -1,6 +1,0 @@
-#ifndef ELEMENT_COMPOUND
-#define ELEMENT_COMPOUND
-
-
-
-#endif
