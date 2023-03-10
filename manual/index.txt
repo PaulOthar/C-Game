@@ -1,0 +1,14 @@
+index
+
+hp
+sp
+atk
+def
+arc
+res
+wg
+mn
+
+paulothar
+nempk1
+douglet
