@@ -14,10 +14,10 @@ elementmaterial
 elementtable
 celldimensions
 cellgrid
-StatsBearer
-StatsBearingCreature
-StatsBearingItem
-TerminalHandler
+statsbearer
+statsBearingcreature
+statsBearingitem
+terminalhandler
 paulothar
 nempk1
 douglet
