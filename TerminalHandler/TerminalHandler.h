@@ -1,9 +1,6 @@
 #ifndef TERMINAL_HANDLER
 #define TERMINAL_HANDLER
 
-const char* TERMINAL_HANDLER_RUN;
-const char* TERMINAL_HANDLER_HELP;
-
 /*
 it will call other functions, if there is an argument.
 if the user desires to run the program,
