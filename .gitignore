@@ -1,11 +1,18 @@
 *
 
 !.gitignore
+
 !/ElementChemistry/
 !/GridManipulation/
 !/StatsManipulation/
 !/TerminalHandler/
 !/manual/
-!manual/index.txt
+
+!ElementChemistry/*
+!GridManipulation/*
+!StatsManipulation/*
+!TerminalHandler/*
+!manual/*
+
 !main.c
 !README.md
