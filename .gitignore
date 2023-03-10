@@ -1,0 +1,10 @@
+*
+
+!.gitignore
+!/ElementChemistry/
+!/GridManipulation/
+!/StatsManipulation/
+!/TerminalHandler/
+!manual/index.txt
+!main.c
+!README.md
