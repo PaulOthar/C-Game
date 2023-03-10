@@ -8,7 +8,16 @@ arc
 res
 wg
 mn
-
+main
+elementcompound
+elementmaterial
+elementtable
+celldimensions
+cellgrid
+StatsBearer
+StatsBearingCreature
+StatsBearingItem
+TerminalHandler
 paulothar
 nempk1
 douglet
