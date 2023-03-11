@@ -4,13 +4,18 @@ CellGrid* new_CellGrid(int width,int height){
     CellGrid* output = (CellGrid*)malloc(sizeof(CellGrid));
     int* cellValue = (int*)malloc(sizeof(int)*width*height);
 
-    if(output != NULL){
+    if(output != NULL && cellValue != NULL){
         output->width = width;
         output->height = height;
         output->cellValue = cellValue;
     }
-    else if(cellValue == NULL){
-        free(output);
+    else{
+        if(cellValue != NULL){
+            free(cellValue);
+        }
+        if(output != NULL){
+            free(output);
+        }
     }
 
     return output;

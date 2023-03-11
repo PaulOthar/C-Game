@@ -14,11 +14,11 @@ typedef struct StsBrer{
 
 extern StatsBearer* new_StatsBearer(char* Name_Reference);
 
+extern void free_StatsBearer(StatsBearer* input);
+
 extern void set_StatsBearer_Aptitudes(StatsBearer* input,int apt[]);
 
 extern void set_StatsBearer_Stats(StatsBearer* input,int stts[]);
-
-extern void free_StatsBearer(StatsBearer* input);
 
 extern void print_StatsBearer_StatsArray(int toPrint[],char* symbol);
 

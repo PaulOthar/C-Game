@@ -5,21 +5,49 @@
 
 StatsBearer* new_StatsBearer(char* Name_Reference){
     StatsBearer* output = (StatsBearer*)malloc(sizeof(StatsBearer));
+    int* apt = (int*)malloc(sizeof(int)*8);
+    int* sts = (int*)malloc(sizeof(int)*8);
 
-    output->name = Name_Reference;
+    if(output != NULL && apt != NULL && sts != NULL){
+        output->name = Name_Reference;
 
-    output->level = 0;
-    output->pointsPerLevel = 0;
+        output->level = 0;
+        output->pointsPerLevel = 0;
+        output->aptitudes = apt;
+        output->stats = sts;
 
-    output->aptitudes = (int*)malloc(sizeof(int)*8);
-    output->stats = (int*)malloc(sizeof(int)*8);
+        int empty[] = {0,0,0,0,0,0,0,0};
 
-    int empty[] = {0,0,0,0,0,0,0,0};
+        set_StatsBearer_Aptitudes(output,empty);
+        set_StatsBearer_Stats(output,empty);
 
-    set_StatsBearer_Aptitudes(output,empty);
-    set_StatsBearer_Stats(output,empty);
+    }
+    else{
+        if(apt != NULL){
+            free(apt);
+        }
+        if(sts != NULL){
+            free(sts);
+        }
+        if(output != NULL){
+            free(output);
+        }
+    }
 
     return output;
+}
+
+void free_StatsBearer(StatsBearer* input){
+    if(input != NULL){
+        if(input->aptitudes != NULL){
+            free(input->aptitudes);
+        }
+        if(input->stats != NULL){
+            free(input->stats);
+        }
+
+        free(input);
+    }
 }
 
 void set_StatsBearer_Aptitudes(StatsBearer* input,int apt[]){
@@ -34,14 +62,6 @@ void set_StatsBearer_Stats(StatsBearer* input,int stts[]){
     for(i = 0;i<8;i++){
         input->aptitudes[i] = stts[i];
     }
-}
-
-void free_StatsBearer(StatsBearer* input){
-    //free(input->name);
-    //free(input->level);
-    //free(input->pointsPerLevel);
-    free(input->aptitudes);
-    free(input->stats);
 }
 
 void print_StatsBearer_StatsArray(int toPrint[],char* symbol){
