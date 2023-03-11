@@ -92,8 +92,20 @@ int printManual(char* arg){
     fptr = fopen(path, "r");
 
     if (fptr == NULL) {
-        printf("There is no Manual for %s",arg);
-        return 2;
+        fclose(fptr);
+
+        strcpy(pth,TERMINAL_HANDLER_MANUAL_FOLDER);
+        path = strcat(pth,arg);
+        path = strcat(path,"/");
+        path = strcat(path,TERMNAL_HANDLER_MANUAL_INDEX);
+        path = strcat(path,TERMINAL_HANDLER_MANUAL_EXTENTION);
+
+        fptr = fopen(path, "r");
+        if(fptr == NULL){
+            printf("There is no manual nor folder for '%s'",arg);
+            fclose(fptr);
+            return 2;
+        }
     }
 
     char mymanual[TERMINAL_HANDLER_MANUAL_LINE_MAX_SIZE];

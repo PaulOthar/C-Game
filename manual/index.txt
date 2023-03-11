@@ -1,7 +1,5 @@
-INDEX:
 index
 
-CONCEPTS:
 hp
 sp
 atk
@@ -11,19 +9,20 @@ res
 wg
 mn
 
-FILES:
-elementcompound
-elementmaterial
-elementtable
-celldimensions
-cellgrid
-statsbearer
-statsbearingcreature
-statsbearingitem
-terminalhandler
-main
+system
+	elementcompound
+	elementmaterial
+	elementtable
+	celldimensions
+	cellgrid
+	statsbearer
+	statsbearingcreature
+	statsbearingitem
+	terminalhandler
+	main
 
-PEOPLE:
-paulothar
-nempk1
-douglet
+people{
+	paulothar
+	nempk1
+	douglet
+}
