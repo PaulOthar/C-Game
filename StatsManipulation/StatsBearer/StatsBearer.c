@@ -3,12 +3,17 @@
 
 #include "StatsBearer.h"
 
-StatsBearer* new_StatsBearer(char* Name_Reference){
+StatsBearer* new_StatsBearer(char* Name_Reference/*,int inv_width,int inv_height,int dim_width,int dim_heigth*/){
     StatsBearer* output = (StatsBearer*)malloc(sizeof(StatsBearer));
     int* apt = (int*)malloc(sizeof(int)*8);
     int* sts = (int*)malloc(sizeof(int)*8);
+    /*
+    CellGrid* cg = new_CellGrid(int inv_width,int inv_height);
+    CellDimensions* cd = new_CellDimensions(int dim_width,int dim_heigth,0);
+    StatsBearer** slt = (StatsBearer**)malloc(sizeof(StatsBearer*)*inv_width*inv_height);
+    */
 
-    if(output != NULL && apt != NULL && sts != NULL){
+    if(output != NULL && apt != NULL && sts != NULL /*&& cg != NULL && cd != NULL && slt != NULL*/){
         output->name = Name_Reference;
 
         output->level = 0;
@@ -21,6 +26,11 @@ StatsBearer* new_StatsBearer(char* Name_Reference){
         set_StatsBearer_Aptitudes(output,empty);
         set_StatsBearer_Stats(output,empty);
 
+        output->inventory = cg;
+        output->occupation = cd;
+        output->slotted = slt;
+
+        output->slottedSize = inv_width*inv_height;
     }
     else{
         if(apt != NULL){
@@ -29,6 +39,17 @@ StatsBearer* new_StatsBearer(char* Name_Reference){
         if(sts != NULL){
             free(sts);
         }
+        /*
+        if(cg != NULL){
+            free_CellGrid(cg);
+        }
+        if(cd != NULL){
+            free_CellDimensions(cd);
+        }
+        if(slt != NULL){
+            free(slt);
+        }
+        */
         if(output != NULL){
             free(output);
         }
@@ -45,7 +66,23 @@ void free_StatsBearer(StatsBearer* input){
         if(input->stats != NULL){
             free(input->stats);
         }
-
+        /*
+        if(cg != NULL){
+            free_CellGrid(cg);
+        }
+        if(cd != NULL){
+            free_CellDimensions(cd);
+        }
+        if(slt != NULL){
+            int i = 0;
+            for(i = 0;i<input->slottedSize;i++){
+                if(input->slotted[i] != NULL){
+                    free(input->slotted[i]);
+                }
+            }
+            free(slt);
+        }
+        */
         free(input);
     }
 }

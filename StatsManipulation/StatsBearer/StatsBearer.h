@@ -1,6 +1,11 @@
 #ifndef STATS_BEARER
 #define STATS_BEARER
 
+/*
+#include "../../GridManipulation/CellDimensions/CellDimensions.h"
+#include "../../GridManipulation/CellGrid/CellGrid.h"
+*/
+
 typedef struct StsBrer{
     char* name;
 
@@ -10,9 +15,17 @@ typedef struct StsBrer{
     //Arrays of Size 8
     int* aptitudes;
     int* stats;
+
+    /*
+    //Inventory Related
+    CellGrid* inventory;
+    CellDimensions* occupation;
+    StatsBearer** slotted;
+    int slottedSize;
+    */
 } StatsBearer;
 
-extern StatsBearer* new_StatsBearer(char* Name_Reference);
+extern StatsBearer* new_StatsBearer(char* Name_Reference/*,int inv_width,int inv_height,int dim_width,int dim_heigth*/);
 
 extern void free_StatsBearer(StatsBearer* input);
 
