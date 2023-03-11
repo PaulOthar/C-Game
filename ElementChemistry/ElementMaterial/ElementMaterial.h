@@ -1,7 +1,7 @@
 #ifndef ELEMENT_MATERIAL
 #define ELEMENT_MATERIAL
 
-typedef struct /**/{
+typedef struct /*ElementMaterial*/{
     int size;
     int* elementCount;
 }ElementMaterial;
