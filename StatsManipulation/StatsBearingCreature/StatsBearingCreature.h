@@ -1,6 +1,0 @@
-#ifndef STATS_BEARING_CREATURE
-#define STATS_BEARING_CREATURE
-
-
-
-#endif
