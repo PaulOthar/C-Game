@@ -5,16 +5,27 @@
 #include "TerminalHandler.h"
 
 const char* TERMINAL_HANDLER_RUN = "-r";
-const char* TERMINAL_HANDLER_VERSION = "-v";
 const char* TERMINAL_HANDLER_HELP = "-h";
+const char* TERMINAL_HANDLER_VERSION = "-v";
 const char* TERMINAL_HANDLER_MANUAL = "-m";
 
-const char* TERMINAL_HANDLER_VERSION_CURRENT = "Pre-Alpha 0.0.1";
+const char* TERMINAL_HANDLER_EXTENTION = ".txt";
 
-char* TERMNAL_HANDLER_MANUAL_INDEX = "index";
+const char* TERMINAL_HANDLER_DATA_FOLDER = "data/";
 const char* TERMINAL_HANDLER_MANUAL_FOLDER = "manual/";
-const char* TERMINAL_HANDLER_MANUAL_EXTENTION = ".txt";
-const int TERMINAL_HANDLER_MANUAL_LINE_MAX_SIZE = 150;
+
+const char* TERMINAL_HANDLER_VERSION_FILE = "version";
+const char* TERMINAL_HANDLER_CREDITS = "credits";
+char* TERMINAL_HANDLER_INDEX = "index";
+
+const int TERMINAL_HANDLER_LINE_MAX_SIZE = 150;
+
+const char* TERMINAL_HANDLER_NO_ARGUMENT = "Please, use an argument:\n'%s' to run the program\n'%s' to see all avaliable basic arguments";
+const char* TERMINAL_HANDLER_UNKNOWN_ARGUMENT = "Argument '%s' does not exist.\nPlease use '%s' to list all basic arguments.";
+const char* TERMINAL_HANDLER_HELP_RUN = "'%s'\tRuns the program\n";
+const char* TERMINAL_HANDLER_HELP_HELP = "'%s'\tPrints this screen\n";
+const char* TERMINAL_HANDLER_HELP_VERSION = "'%s'\tPrints the current version, and its contributors\n";
+const char* TERMINAL_HANDLER_HELP_MANUAL = "'%s ?'\tPrints the manual for something\n";
 
 int handleArgs(int argc,char *argv[]){
     if(argc <= 1){
@@ -24,15 +35,15 @@ int handleArgs(int argc,char *argv[]){
     if(strcmp(argv[1],TERMINAL_HANDLER_RUN) == 0){
         return run();
     }
-    if(strcmp(argv[1],TERMINAL_HANDLER_VERSION) == 0){
-        return printVersion();
-    }
     if(strcmp(argv[1],TERMINAL_HANDLER_HELP) == 0){
         return printHelp();
     }
+    if(strcmp(argv[1],TERMINAL_HANDLER_VERSION) == 0){
+        return printVersion();
+    }
     if(strcmp(argv[1],TERMINAL_HANDLER_MANUAL) == 0){
         if(argc <= 2){
-            return printManual(TERMNAL_HANDLER_MANUAL_INDEX);
+            return printManual(TERMINAL_HANDLER_INDEX);
         }
         return printManual(argv[2]);
     }
@@ -41,12 +52,12 @@ int handleArgs(int argc,char *argv[]){
 }
 
 int noArgument(){
-    printf("Please, use an argument:\n'%s' to run the program\n'%s' to see all avaliable basic commands",TERMINAL_HANDLER_RUN,TERMINAL_HANDLER_HELP);
+    printf(TERMINAL_HANDLER_NO_ARGUMENT,TERMINAL_HANDLER_RUN,TERMINAL_HANDLER_HELP);
     return -1;
 }
 
 int unknownArgument(char* arg){
-    printf("Argument '%s' Does not Exist.\nPlease use '%s' to list all basic commands.",arg,TERMINAL_HANDLER_HELP);
+    printf(TERMINAL_HANDLER_UNKNOWN_ARGUMENT,arg,TERMINAL_HANDLER_HELP);
     return -1;
 }
 
@@ -55,68 +66,79 @@ int run(){
     return 0;
 }
 
-int printVersion(){
-    printf("\nVersion:%s",TERMINAL_HANDLER_VERSION_CURRENT);
-    printf("\n");
-    printf("\nProgrammer/Artist/Writter\n\tPaulOthar : github.com/PaulOthar");
-    printf("\n");
-    printf("\nSpecial Contributors\n");
-    printf("\nC Syntax Mentor\n\tHelder(Nempk1) = ADM Saphado : github.com/nempk1 | twitch.tv/nempk1");
-    printf("\n");
-    printf("\nIdea Validation & Creative Consultant\n\tDouglet(Gameplays & tutorials) : ???");
-
-    //printf("\nVersion:\nAlpha 0.1\n\nAuthor:PaulOthar\n\nSpecial Thanks To:\nHelder(Vulgo nempk1)(AKA adm Saphado)\nDouglet Gameplays e Tutoriais");
+int printHelp(){
+    printf(TERMINAL_HANDLER_HELP_RUN,TERMINAL_HANDLER_RUN);
+    printf(TERMINAL_HANDLER_HELP_HELP,TERMINAL_HANDLER_HELP);
+    printf(TERMINAL_HANDLER_HELP_VERSION,TERMINAL_HANDLER_VERSION);
+    printf(TERMINAL_HANDLER_HELP_MANUAL,TERMINAL_HANDLER_MANUAL);
     return 1;
 }
 
-int printHelp(){
-    printf("'%s'\tRuns The Program\n",TERMINAL_HANDLER_RUN);
-    printf("'%s'\tShows the Current Version\n",TERMINAL_HANDLER_VERSION);
-    printf("'%s'\tShows this Screen\n",TERMINAL_HANDLER_HELP);
-    printf("'%s ?'\tShows the Details of Something",TERMINAL_HANDLER_MANUAL);
-    printf("\n\nKeep in mind that the '%s' argument draws information from the local '%s' folder.",TERMINAL_HANDLER_MANUAL,TERMINAL_HANDLER_MANUAL_FOLDER);
-    printf("\nIf you want to include a new information, make sure to update the '%s%s' file, and have it as '%s'",TERMNAL_HANDLER_MANUAL_INDEX,TERMINAL_HANDLER_MANUAL_EXTENTION,TERMINAL_HANDLER_MANUAL_EXTENTION);
+int printFile(char* path,char* notFound){
+    FILE *fptr;
+
+    fptr = fopen(path, "r");
+
+    int status = 0;
+
+    if(fptr != NULL){
+        status = 1;
+        char content[TERMINAL_HANDLER_LINE_MAX_SIZE];
+
+        printf("\n");
+        while(!feof(fptr)){
+            fgets(content,TERMINAL_HANDLER_LINE_MAX_SIZE,fptr);
+
+            printf("%s",content);
+        }
+        printf("\n");
+    }
+    else{
+        if(notFound != NULL){
+            printf("%s",notFound);
+        }
+    }
+
+    fclose(fptr);
+    return status;
+}
+
+int printVersion(){
+    char pth[200];
+
+    strcpy(pth,TERMINAL_HANDLER_DATA_FOLDER);
+    strcat(pth,TERMINAL_HANDLER_VERSION_FILE);
+    strcat(pth,TERMINAL_HANDLER_EXTENTION);
+
+    printFile(pth,"\nVersion file not found :(\n");
+
+    strcpy(pth,TERMINAL_HANDLER_DATA_FOLDER);
+    strcat(pth,TERMINAL_HANDLER_CREDITS);
+    strcat(pth,TERMINAL_HANDLER_EXTENTION);
+
+    printFile(pth,"\nCredits file not found :(\n");
+
     return 1;
 }
 
 int printManual(char* arg){
-    FILE *fptr;
+    char pth[200];
 
-    char pth[20];
+    strcpy(pth,TERMINAL_HANDLER_DATA_FOLDER);
+    strcat(pth,TERMINAL_HANDLER_MANUAL_FOLDER);
+    strcat(pth,arg);
+    strcat(pth,TERMINAL_HANDLER_EXTENTION);
 
-    strcpy(pth,TERMINAL_HANDLER_MANUAL_FOLDER);
+    if(printFile(pth,NULL) == 0){
+        strcpy(pth,TERMINAL_HANDLER_DATA_FOLDER);
+        strcat(pth,TERMINAL_HANDLER_MANUAL_FOLDER);
+        strcat(pth,arg);
+        strcat(pth,"/");
+        strcat(pth,TERMINAL_HANDLER_INDEX);
+        strcat(pth,TERMINAL_HANDLER_EXTENTION);
 
-    char* path = strcat(pth,arg);
-    path = strcat(path,TERMINAL_HANDLER_MANUAL_EXTENTION);
-
-    fptr = fopen(path, "r");
-
-    if (fptr == NULL) {
-        fclose(fptr);
-
-        strcpy(pth,TERMINAL_HANDLER_MANUAL_FOLDER);
-        path = strcat(pth,arg);
-        path = strcat(path,"/");
-        path = strcat(path,TERMNAL_HANDLER_MANUAL_INDEX);
-        path = strcat(path,TERMINAL_HANDLER_MANUAL_EXTENTION);
-
-        fptr = fopen(path, "r");
-        if(fptr == NULL){
-            printf("There is no manual nor folder for '%s'",arg);
-            fclose(fptr);
-            return 2;
-        }
+        printFile(pth,"\nNo manual file or folder found :(\n");
     }
 
-    char mymanual[TERMINAL_HANDLER_MANUAL_LINE_MAX_SIZE];
-
-    while(!feof(fptr)){
-    fgets(mymanual,TERMINAL_HANDLER_MANUAL_LINE_MAX_SIZE,fptr);
-
-    printf("%s",mymanual);
-    }
-
-    fclose(fptr);
-
-    return 2;
+    return 1;
 }
