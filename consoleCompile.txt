@@ -1,0 +1,1 @@
+gcc main.c TerminalHandler/TerminalHandler.c AbilityManipulation/AbilityManipulation.c -o main
